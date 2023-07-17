@@ -78,6 +78,14 @@ def main():
     best_eval_psnr = 0
     best_test_psnr = 0
     current_daytime = datetime.datetime.now().strftime("%Y_%m_%d-%H_%M_%S")
+    steps = 1120000
+    save_interval = 1000
+    report_interval = 50
+    test_intervals = [10000, 20000, 30000, 40000,
+                      50000, 60000, 70000, 80000, 90000, 100000]
+    evaluation_interval = [10000, 20000, 30000, 40000,
+                           50000, 60000, 70000, 80000, 90000, 100000]
+    val_steps = 50
 
     # Model summary
     pan_example = torch.randn(
@@ -87,13 +95,7 @@ def main():
 
     summary(model, pan_example, mslr_example, verbose=1)
 
-    steps = 1120000
-    save_interval = 1000
-    report_interval = 50
-    test_intervals = [10000, 20000, 30000, 40000,
-                      50000, 60000, 70000, 80000, 90000, 100000]
-    evaluation_interval = [10000, 20000, 30000, 40000,
-                           50000, 60000, 70000, 80000, 90000, 100000]
+    
 
     print('==> Starting training ...')
     train_iter = iter(train_loader)
