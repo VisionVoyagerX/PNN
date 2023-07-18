@@ -99,7 +99,7 @@ def main():
     # load checkpoint
     if continue_from_checkpoint:
         tr_metrics, val_metrics, test_metrics = load_checkpoint(torch.load(
-            'checkpoint/pnn_model/pnn_model_2023_07_17-11_30_23_best_eval.pth.tar'), model, optimizer, tr_metrics, val_metrics, test_metrics)
+            'checkpoints/pnn_model/pnn_model_2023_07_17-11_30_23_best_eval.pth.tar'), model, optimizer, tr_metrics, val_metrics, test_metrics)
         print('Model Loaded ...')
 
     print('==> Starting training ...')
