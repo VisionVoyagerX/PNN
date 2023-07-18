@@ -117,7 +117,7 @@ def main():
                 # compute metrics
                 test_metric = test_metric_collection.compute()
 
-                figure, axis = plt.subplots(nrows=1, ncols=4, figsize=(15, 15))
+                figure, axis = plt.subplots(nrows=1, ncols=4, figsize=(15, 5))
                 axis[0].imshow((scaleMinMax(mslr.permute(0, 3, 2, 1).detach().cpu()[
                                0, ...].numpy())).astype(np.float32)[..., :3], cmap='viridis')
                 axis[0].set_title('(a) LR')
@@ -131,7 +131,7 @@ def main():
                 axis[2].imshow((scaleMinMax(mssr.permute(0, 3, 2, 1).detach().cpu()[
                                0, ...].numpy())).astype(np.float32)[..., :3], cmap='viridis')
                 axis[2].set_title(
-                    f'(c) Ours {test_metric["psnr"]:.2f}dB/{test_metric["ssim"]:.4f}')
+                    f'(c) PNN {test_metric["psnr"]:.2f}dB/{test_metric["ssim"]:.4f}')
                 axis[2].axis("off")
 
                 axis[3].imshow((scaleMinMax(mshr.permute(0, 3, 2, 1).detach().cpu()[
