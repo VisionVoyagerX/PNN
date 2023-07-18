@@ -8,6 +8,10 @@ Based on implementation: https://github.com/xyc19970716/Deep-Learning-PanSharpen
 
 Paper link: https://www.mdpi.com/2072-4292/8/7/594
 
+# Dataset
+
+The GaoFen-2 and WorldView-3 dataset download links can be found in https://github.com/liangjiandeng/PanCollection
+
 # Torch Summary
 
 ```
