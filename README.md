@@ -30,3 +30,7 @@ Estimated Total Size (MB): 50.56
 # Statistics
 
 ![alt text](https://github.com/nickdndndn/PNN/blob/main/results/statistics.png?raw=true)
+
+# Visualization of Results
+
+![alt text](https://github.com/nickdndndn/PNN/blob/main/results/Images.png?raw=true)
