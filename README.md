@@ -27,3 +27,6 @@ Params size (MB): 0.31
 Estimated Total Size (MB): 50.56
 ==========================================================================================
 ```
+# Statistics
+
+![alt text](https://github.com/nickdndndn/PNN/blob/main/results/statistics.png?raw=true)
