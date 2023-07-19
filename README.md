@@ -35,21 +35,21 @@ Params size (MB): 0.31
 Estimated Total Size (MB): 50.56
 ==========================================================================================
 ```
-
-# GaoFen-2 Results
-## Training statistics
+# Quantitative Results
+## GaoFen-2
 
 ![alt text](https://github.com/nickdndndn/PNN/blob/main/results/Figure.png?raw=true)
 
-## Visualization of Results
+
+## WorldView-3
+
+![alt text](https://github.com/nickdndndn/PNN/blob/main/results/Figure.png?raw=true)
+
+# Qualitative Results
+## GaoFen-2
 
 ![alt text](https://github.com/nickdndndn/PNN/blob/main/results/Images.png?raw=true)
 
-# WorldView-3 Results
-## Training statistics
-
-![alt text](https://github.com/nickdndndn/PNN/blob/main/results/Figure.png?raw=true)
-
-## Visualization of Results
+## WorldView-3
 
 ![alt text](https://github.com/nickdndndn/PNN/blob/main/results/Images.png?raw=true)
