@@ -37,7 +37,7 @@ Estimated Total Size (MB): 50.56
 ```
 # Training statistics
 
-![alt text](https://github.com/nickdndndn/PNN/blob/main/results/Figures.png?raw=true)
+![alt text](https://github.com/nickdndndn/PNN/blob/main/results/Figure.png?raw=true)
 
 # Visualization of Results
 
