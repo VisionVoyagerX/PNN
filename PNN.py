@@ -7,19 +7,19 @@ import matplotlib.pyplot as plt
 
 
 class PNNmodel(nn.Module):
-    def __init__(self, scale, **kwargs):
+    def __init__(self, scale, ms_channels, **kwargs):
         super(PNNmodel, self).__init__()
         self.mslr_mean = kwargs.get('mslr_mean')
         self.mslr_std = kwargs.get('mslr_std')
         self.pan_mean = kwargs.get('pan_mean')
         self.pan_std = kwargs.get('pan_std')
 
-        self.conv_1 = nn.Conv2d(in_channels=5,
+        self.conv_1 = nn.Conv2d(in_channels=ms_channels + 1,
                                 out_channels=64, kernel_size=9, stride=1, padding=4)
         self.conv_2 = nn.Conv2d(
             in_channels=64, out_channels=32, kernel_size=5, stride=1, padding=2)
         self.conv_3 = nn.Conv2d(
-            in_channels=32, out_channels=4, kernel_size=5, stride=1, padding=2)
+            in_channels=32, out_channels=ms_channels, kernel_size=5, stride=1, padding=2)
         self.relu = nn.ReLU()
         # (input, size=None, scale_factor=None, mode='nearest', align_corners=None, recompute_scale_factor=None, antialias=False)
         self.interpolate = interpolate
@@ -46,6 +46,6 @@ class PNNmodel(nn.Module):
 
 if __name__ == "__main__":
     pan = torch.randn(1, 1, 256, 256)
-    lr = torch.randn(1, 4, 64, 64)
+    lr = torch.randn(1, 8, 64, 64)
     pnn = PNNmodel(4)
     print(pnn(pan, lr).shape)

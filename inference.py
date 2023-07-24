@@ -18,9 +18,8 @@ import numpy as np
 
 def main():
     # Prepare device
-    # TODO add more code for server
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    print(device)
+    print('Device: ', device)
 
     # Initialize DataLoader
     train_dataset = GaoFen2(
@@ -39,7 +38,6 @@ def main():
         dataset=test_dataset, batch_size=64, shuffle=False)
 
     # Initialize Model, optimizer, criterion and metrics
-    # TODO is imge_size necesasary?
     model = PNNmodel(scale=4, mslr_mean=train_dataset.mslr_mean.to(device), mslr_std=train_dataset.mslr_std.to(device), pan_mean=train_dataset.pan_mean.to(device),
                      pan_std=train_dataset.pan_std.to(device)).to(device)
 
@@ -51,8 +49,8 @@ def main():
 
     optimizer = SGD([
         {'params': params},
-        {'params': base_params, 'lr': 1e-9}
-    ], lr=1e-8, momentum=0.9)
+        {'params': base_params, 'lr': 5e-9}
+    ], lr=5e-8, momentum=0.9)
 
     criterion = MSELoss().to(device)
 
