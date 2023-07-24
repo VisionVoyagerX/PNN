@@ -86,13 +86,8 @@ def main():
     val_steps = 50
     continue_from_checkpoint = False
 
-    # Model summary
-    pan_example = torch.randn(
-        (1, 1, 256, 256)).to(device)
-    mslr_example = torch.randn(
-        (1, 4, 64, 64)).to(device)
-
-    summary(model, pan_example, mslr_example, verbose=1)
+    sum_res = summary(model, [(1, 1, 256, 256), (1, 8, 64, 64)],
+                      dtypes=[torch.float32, torch.float32])
 
     # load checkpoint
     if continue_from_checkpoint:
