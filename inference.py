@@ -15,6 +15,8 @@ from utils import *
 import matplotlib.pyplot as plt
 import numpy as np
 
+SERVER = '/home/ubuntu/project'
+
 
 def main():
     # Prepare device
@@ -23,17 +25,17 @@ def main():
 
     # Initialize DataLoader
     train_dataset = WV3(
-        Path("/media/nick/INTENSO/Data/WorldView3/train/train_wv3-001.h5"), transforms=[(RandomHorizontalFlip(1), 0.3), (RandomVerticalFlip(1), 0.3)])  # /home/ubuntu/project
+        Path(SERVER + "/Data/WorldView3/train/train_wv3-001.h5"), transforms=[(RandomHorizontalFlip(1), 0.3), (RandomVerticalFlip(1), 0.3)])  # /home/ubuntu/project
     train_loader = DataLoader(
         dataset=train_dataset, batch_size=128, shuffle=True, drop_last=True)
 
     validation_dataset = WV3(
-        Path("/media/nick/INTENSO/Data/WorldView3/val/valid_wv3.h5"))
+        Path(SERVER + "/Data/WorldView3/val/valid_wv3.h5"))
     validation_loader = DataLoader(
         dataset=validation_dataset, batch_size=64, shuffle=True)
 
     test_dataset = WV3(
-        Path("/media/nick/INTENSO/Data/WorldView3/drive-download-20230627T115841Z-001/test_wv3_multiExm1.h5"))
+        Path(SERVER + "/Data/WorldView3/drive-download-20230627T115841Z-001/test_wv3_multiExm1.h5"))
     test_loader = DataLoader(
         dataset=test_dataset, batch_size=64, shuffle=False)
 
@@ -138,6 +140,14 @@ def main():
                 axis[3].axis("off")
 
                 plt.savefig('results/Images.png')
+
+                mslr = mslr.permute(0, 3, 2, 1).detach().cpu().numpy()
+                pan = pan.permute(0, 3, 2, 1).detach().cpu().numpy()
+                mssr = mssr.permute(0, 3, 2, 1).detach().cpu().numpy()
+                gt = mshr.permute(0, 3, 2, 1).detach().cpu().numpy()
+
+                np.savez('results/img_array.npz', mslr=mslr,
+                         pan=pan, mssr=mssr, gt=gt)
 
 
 if __name__ == '__main__':
