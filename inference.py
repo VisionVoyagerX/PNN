@@ -100,12 +100,17 @@ def main():
         return ((x - np.nanmin(x)) / (np.nanmax(x) - np.nanmin(x)))
 
     idx = 14
+    test_iterator = iter(test_loader)
+
+    for i in test_iterator:
+        print(1)
     # evaluation mode
     model.eval()
     with torch.no_grad():
-        test_iterator = iter(test_loader)
+        
         for i, (pan, mslr, mshr) in enumerate(test_iterator):
             print(i)
+            print(pan.shape)
             if idx == i:
                 # forward
                 pan, mslr, mshr = pan.to(device), mslr.to(
