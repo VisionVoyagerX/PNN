@@ -140,6 +140,7 @@ def main():
                 axis[3].axis("off")
 
                 plt.savefig('results/Images.png')
+                print('saving image')
 
                 mslr = mslr.permute(0, 3, 2, 1).detach().cpu().numpy()
                 pan = pan.permute(0, 3, 2, 1).detach().cpu().numpy()
