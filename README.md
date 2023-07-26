@@ -44,7 +44,7 @@ Estimated Total Size (MB): 50.56
 
 ## WorldView-3
 
-![alt text](https://github.com/nickdndndn/PNN/blob/main/results/Figures_WV3.png?raw=true)
+![alt text](https://github.com/nickdndndn/PNN/blob/main/results/Figure_WV3.png?raw=true)
 
 # Qualitative Results
 ## GaoFen-2
