@@ -105,6 +105,7 @@ def main():
     with torch.no_grad():
         test_iterator = iter(test_loader)
         for i, (pan, mslr, mshr) in enumerate(test_iterator):
+            print(i)
             if idx == i:
                 # forward
                 pan, mslr, mshr = pan.to(device), mslr.to(
