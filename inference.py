@@ -37,7 +37,7 @@ def main():
     test_dataset = WV3(
         Path("/home/ubuntu/project/Data/WorldView3/drive-download-20230627T115841Z-001/test_wv3_multiExm1.h5"))
     test_loader = DataLoader(
-        dataset=test_dataset, batch_size=64, shuffle=False)
+        dataset=test_dataset, batch_size=1, shuffle=False)
 
     # Initialize Model, optimizer, criterion and metrics
     model = PNNmodel(scale=4, ms_channels=8, mslr_mean=train_dataset.mslr_mean.to(device), mslr_std=train_dataset.mslr_std.to(device), pan_mean=train_dataset.pan_mean.to(device),
@@ -100,14 +100,10 @@ def main():
         return ((x - np.nanmin(x)) / (np.nanmax(x) - np.nanmin(x)))
 
     idx = 14
-    test_iterator = iter(test_loader)
-
-    for i in test_iterator:
-        print(1)
     # evaluation mode
     model.eval()
     with torch.no_grad():
-        
+        test_iterator = iter(test_loader)
         for i, (pan, mslr, mshr) in enumerate(test_iterator):
             print(i)
             print(pan.shape)
