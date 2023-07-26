@@ -36,10 +36,21 @@ Estimated Total Size (MB): 50.56
 ==========================================================================================
 ```
 
-# Training statistics
+# Quantitative Results
+## GaoFen-2
 
-![alt text](https://github.com/nickdndndn/PNN/blob/main/results/Figure.png?raw=true)
+![alt text](https://github.com/nickdndndn/PNN/blob/main/results/Figure_GF2.png?raw=true)
 
-# Visualization of Results
 
-![alt text](https://github.com/nickdndndn/PNN/blob/main/results/Images.png?raw=true)
+## WorldView-3
+
+![alt text](https://github.com/nickdndndn/PNN/blob/main/results/Figures_WV3.png?raw=true)
+
+# Qualitative Results
+## GaoFen-2
+
+![alt text](https://github.com/nickdndndn/PNN/blob/main/results/Images_GF2.png?raw=true)
+
+## WorldView-3
+
+![alt text](https://github.com/nickdndndn/PNN/blob/main/results/Images_WV3.png?raw=true)
