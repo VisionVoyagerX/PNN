@@ -24,23 +24,23 @@ def main():
     print('Device: ', device)
 
     # Initialize DataLoader
-    train_dataset = WV3(
-        Path("/home/ubuntu/project/Data/WorldView3/train/train_wv3-001.h5"), transforms=[(RandomHorizontalFlip(1), 0.3), (RandomVerticalFlip(1), 0.3)])  # /home/ubuntu/project
+    train_dataset = GaoFen2(
+        Path("/home/ubuntu/project/Data/GaoFen-2/train/train_gf2-001.h5"), transforms=[(RandomHorizontalFlip(1), 0.3), (RandomVerticalFlip(1), 0.3)])  # /home/ubuntu/project
     train_loader = DataLoader(
         dataset=train_dataset, batch_size=128, shuffle=True, drop_last=True)
 
-    validation_dataset = WV3(
-        Path("/home/ubuntu/project/Data/WorldView3/val/valid_wv3.h5"))
+    validation_dataset = GaoFen2(
+        Path("/home/ubuntu/project/Data/GaoFen-2/val/valid_gf2.h5"))
     validation_loader = DataLoader(
         dataset=validation_dataset, batch_size=64, shuffle=True)
 
-    test_dataset = WV3(
-        Path("/home/ubuntu/project/Data/WorldView3/drive-download-20230627T115841Z-001/test_wv3_multiExm1.h5"))
+    test_dataset = GaoFen2(
+        Path("/home/ubuntu/project/Data/GaoFen-2/drive-download-20230623T170619Z-001/test_gf2_multiExm1.h5"))
     test_loader = DataLoader(
         dataset=test_dataset, batch_size=1, shuffle=False)
 
     # Initialize Model, optimizer, criterion and metrics
-    model = PNNmodel(scale=4, ms_channels=8, mslr_mean=train_dataset.mslr_mean.to(device), mslr_std=train_dataset.mslr_std.to(device), pan_mean=train_dataset.pan_mean.to(device),
+    model = PNNmodel(scale=4, ms_channels=4, mslr_mean=train_dataset.mslr_mean.to(device), mslr_std=train_dataset.mslr_std.to(device), pan_mean=train_dataset.pan_mean.to(device),
                      pan_std=train_dataset.pan_std.to(device)).to(device)
 
     my_list = ['conv_3.weight', 'conv_3.bias']
@@ -93,20 +93,18 @@ def main():
     # load checkpoint
     if continue_from_checkpoint:
         tr_metrics, val_metrics, test_metrics = load_checkpoint(torch.load(
-            'checkpoints/pnn_model_WV3/pnn_model_WV3_2023_07_24-19_19_31.pth.tar'), model, optimizer, tr_metrics, val_metrics, test_metrics)
+            'checkpoints/pnn_model/pnn_model_2023_07_17-11_30_23.pth.tar'), model, optimizer, tr_metrics, val_metrics, test_metrics)
         print('Model Loaded ...')
 
     def scaleMinMax(x):
         return ((x - np.nanmin(x)) / (np.nanmax(x) - np.nanmin(x)))
 
-    idx = 14
+    idx = 15
     # evaluation mode
     model.eval()
     with torch.no_grad():
         test_iterator = iter(test_loader)
         for i, (pan, mslr, mshr) in enumerate(test_iterator):
-            print(i)
-            print(pan.shape)
             if idx == i:
                 # forward
                 pan, mslr, mshr = pan.to(device), mslr.to(
@@ -142,7 +140,6 @@ def main():
                 axis[3].axis("off")
 
                 plt.savefig('results/Images.png')
-                print('saving image')
 
                 mslr = mslr.permute(0, 3, 2, 1).detach().cpu().numpy()
                 pan = pan.permute(0, 3, 2, 1).detach().cpu().numpy()
