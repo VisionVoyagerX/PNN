@@ -27,12 +27,14 @@ def main():
         eval_dir = '/home/ubuntu/project/Data/GaoFen-2/val/valid_gf2.h5'
         test_dir =  '/home/ubuntu/project/Data/GaoFen-2/drive-download-20230623T170619Z-001/test_gf2_multiExm1.h5'
         checkpoint_dir = 'checkpoints/pnn_model_GF2/pnn_model_GF2_2023_07_17-11_30_23.pth.tar'
+        ms_channel = 4
     elif choose_dataset == 'WV3':
         dataset = eval('WV3')
         tr_dir = '/home/ubuntu/project/Data/WorldView3/train/train_wv3-001.h5'
         eval_dir = '/home/ubuntu/project/Data/WorldView3/val/valid_wv3.h5'
         test_dir =  '/home/ubuntu/project/Data/WorldView3/drive-download-20230627T115841Z-001/test_wv3_multiExm1.h5'
         checkpoint_dir = 'checkpoints/pnn_model_WV3/pnn_model_WV3_2023_07_24-19_19_31.pth.tar'
+        ms_channel = 8
     else:
         print(choose_dataset, ' does not exist')
 
@@ -58,7 +60,7 @@ def main():
         dataset=test_dataset, batch_size=1, shuffle=False)
 
     # Initialize Model, optimizer, criterion and metrics
-    model = PNNmodel(scale=4, ms_channels=4, mslr_mean=train_dataset.mslr_mean.to(device), mslr_std=train_dataset.mslr_std.to(device), pan_mean=train_dataset.pan_mean.to(device),
+    model = PNNmodel(scale=4, ms_channels=ms_channel, mslr_mean=train_dataset.mslr_mean.to(device), mslr_std=train_dataset.mslr_std.to(device), pan_mean=train_dataset.pan_mean.to(device),
                      pan_std=train_dataset.pan_std.to(device)).to(device)
 
     my_list = ['conv_3.weight', 'conv_3.bias']
@@ -134,6 +136,7 @@ def main():
 
             # compute metrics
             test_metric = test_metric_collection.compute()
+            test_metric_collection.reset()
 
             figure, axis = plt.subplots(nrows=1, ncols=4, figsize=(15, 5))
             axis[0].imshow((scaleMinMax(mslr.permute(0, 3, 2, 1).detach().cpu()[
