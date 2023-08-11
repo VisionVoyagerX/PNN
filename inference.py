@@ -19,7 +19,7 @@ SERVER = '/home/ubuntu/project'
 
 
 def main():
-    choose_dataset = 'GaoFen2' #or 'WV3'
+    choose_dataset = 'WV3' #or 'WV3'
 
     if choose_dataset == 'GaoFen2':
         dataset = eval('GaoFen2')
