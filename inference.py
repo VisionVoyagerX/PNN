@@ -157,7 +157,7 @@ def main():
             axis[3].set_title('(d) GT')
             axis[3].axis("off")
 
-            plt.savefig(f'results/Images_{i}.png')
+            plt.savefig(f'results/Images_{choose_dataset}_{i}.png')
 
             mslr = mslr.permute(0, 3, 2, 1).detach().cpu().numpy()
             pan = pan.permute(0, 3, 2, 1).detach().cpu().numpy()
