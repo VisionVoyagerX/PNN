@@ -23,7 +23,7 @@ def main():
     train_dataset = WV3(
         Path("/home/ubuntu/project/Data/WorldView3/train/train_wv3-001.h5"), transforms=[(RandomHorizontalFlip(1), 0.3), (RandomVerticalFlip(1), 0.3)])  # /home/ubuntu/project
     train_loader = DataLoader(
-        dataset=train_dataset, batch_size=128, shuffle=True, drop_last=True)
+        dataset=train_dataset, batch_size=128, shuffle=True, drop_last=True, num_workers=8)
 
     validation_dataset = WV3(
         Path("/home/ubuntu/project/Data/WorldView3/val/valid_wv3.h5"))
